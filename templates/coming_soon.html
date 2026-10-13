@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Tamosho TJ — Скоро в кино{% endblock %}
+{% block content %}
+<section class="info-page">
+    <h1>Скоро в кино</h1>
+    <p>Информация о будущих премьерах скоро появится.</p>
+    <p><a href="{% url 'get_all_movies' %}">Посмотреть фильмы в афише</a></p>
+</section>
+{% endblock %}

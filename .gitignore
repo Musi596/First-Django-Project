@@ -1,0 +1,27 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Секреты
+.env
+.env.*
+!.env.example
+
+# Django
+db.sqlite3
+*.log
+staticfiles/
+media/
+local_settings.py
+
+# Редакторы и ОС
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

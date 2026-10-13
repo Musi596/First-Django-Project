@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Tamosho TJ - Добавить жанр{% endblock %}
+{% block content %}
+<h1>Добавить жанр</h1>
+<form method="post" class="genre_form">
+    {% csrf_token %}
+    <label>Название жанра <input type="text" name="name" required maxlength="50" placeholder="Название жанра"></label>
+    <button class="button" type="submit">Сохранить</button>
+</form>
+{% endblock %}

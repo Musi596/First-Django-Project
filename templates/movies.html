@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block page_class %}movies-page{% endblock %}
+{% block title %}Tamosho TJ - Фильмы{% endblock %}
+{% block content %}
+<div class="catalog-heading">
+    <h1>Фильмы</h1>
+    <div class="catalog-actions">
+        <a href="{% url 'add_movie' %}">Добавить фильм</a>
+        <a href="{% url 'add_genre' %}">Добавить жанр</a>
+    </div>
+</div>
+
+<div class="movie-grid">
+    {% for movie in movies %}
+    <article class="movie-card">
+        {% if movie.image %}
+            <img class="movie-poster" src="{{ movie.image.url }}" alt="Постер фильма {{ movie.name }}">
+        {% else %}
+            <div class="movie-poster-placeholder">Постер не добавлен</div>
+        {% endif %}
+        <span class="movie-genre">{{ movie.genre }}</span>
+        <h2>{{ movie.name }}</h2>
+        <p class="movie-description">{{ movie.description|truncatewords:20 }}</p>
+        <div class="movie-management">
+            <a href="{% url 'update_movie' movie.id %}">Изменить</a>
+            <a href="{% url 'delete_movie' movie.id %}">Удалить</a>
+        </div>
+        <details class="movie-feedback" id="{% if forloop.first %}feedback{% else %}feedback-{{ movie.id }}{% endif %}">
+            <summary>Отзывы ({{ movie.feedbacks.count }})</summary>
+            {% for feedback in movie.feedbacks.all %}<p>{{ feedback.title }}</p>
+            {% empty %}<p>Пока нет отзывов.</p>{% endfor %}
+            <form method="post" action="{% url 'add_feedback' %}">
+                {% csrf_token %}
+                <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                <label>Оставить отзыв <textarea name="title" maxlength="200" required></textarea></label>
+                <button type="submit">Отправить отзыв</button>
+            </form>
+        </details>
+    </article>
+    {% empty %}
+    <p>Фильмов пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Tamosho TJ - Добавить фильм{% endblock %}
+{% block content %}
+<h1>Добавить фильм</h1>
+<form method="post" enctype="multipart/form-data" class="movie_form">
+    {% csrf_token %}
+    <label>Название фильма <input type="text" name="name" required maxlength="200" placeholder="Название"></label>
+    <label>Описание фильма <textarea name="description" required placeholder="Описание"></textarea></label>
+    <label>Жанр
+        <select name="genre_id" required>
+            <option value="" disabled selected>Выберите жанр</option>
+            {% for genre in genres %}<option value="{{ genre.id }}">{{ genre.name }}</option>{% endfor %}
+        </select>
+    </label>
+    <label>Постер <input type="file" name="image" accept="image/*"></label>
+    <button class="button" type="submit">Сохранить</button>
+</form>
+{% endblock %}

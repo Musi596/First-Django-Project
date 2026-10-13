@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tamosho TJ{% endblock %}</title>
+    <style>
+        :root { --accent: #f0a000; color-scheme: dark; font-family: system-ui, sans-serif; }
+        body { margin: 0; background: #0d0d0d; color: #eee; }
+        a { color: inherit; text-decoration: none; }
+        a:hover, .accent { color: var(--accent); }
+        header, footer { background: #1a0e05; padding: 20px; }
+        .bar { max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+        .bar nav { display: flex; flex-wrap: wrap; gap: 24px; }
+        .logo { height: 40px; }
+        main { max-width: 1200px; margin: auto; padding: 32px 20px; min-height: 50vh; }
+        footer { text-align: center; color: #999; font-size: 14px; }
+
+        .info-page { max-width: 800px; margin: auto; line-height: 1.7; }
+        .cinema-hall { padding: 20px; border: 1px solid #333; border-radius: 12px; }
+        .movies-page { background: #f5f5f5; }
+        .movies-page main { color: #111; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 24px; }
+        .movie-poster, .movie-poster-placeholder { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px; background: #ccc; }
+    </style>
+</head>
+<body class="{% block page_class %}{% endblock %}">
+<header>
+    <div class="bar">
+        <a href="{% url 'index' %}"><img class="logo" src="https://tamosho.tj/img/logo.svg" alt="Тамошо"></a>
+        <nav>
+            <a href="{% url 'get_all_movies' %}">Афиша</a>
+            <a href="{% url 'coming_soon' %}">Скоро в кино</a>
+            <a href="{% url 'cinema' %}">Кинотеатр</a>
+            <a href="{% url 'add_movie' %}">Добавить фильм</a>
+            <a class="accent" href="{% url 'get_all_movies' %}#feedback">Оставить отзыв</a>
+        </nav>
+    </div>
+</header>
+
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p><span class="accent">Касса:</span> +992934540000, +992989540000</p>
+    <p>Душанбе, Проспект Исмоили Сомони, 14/2 · Ежедневно с 09:00 до 01:00</p>
+    <p>© 2026 Тамошо. Все права защищены.</p>
+</footer>
+</body>
+</html>
